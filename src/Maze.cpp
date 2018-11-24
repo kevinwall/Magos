@@ -4,19 +4,30 @@
 #include <ctime>
 #include <string>
 
-Maze::Maze( int col, int lin) : lin(lin_) , col(col_) 
+Maze::Maze( int col = 2, int lin = 1 , 
+	std::vecto<Cell> ptr_maze ) : col_(col) , lin_(lin)
 {
-	maze = new FlagCell [ col * lin];
+	ptr_maze.reserve( col_* lin_);
 
-	Make_maze();
+	Make_maze( ptr_maze );
 }
 
 Maze::~Maze(){
 
-	delete [] maze;
+	delete [] ptr_maze;
 }
 
-void Maze::Maze_maze(){
+void Maze::Make_maze(std::vecto<Maze> ptr_maze ){
 
-	
+	for (std::vector<Maze>::iterator it = ptr_maze.begin() 
+		; it != ptr_maze.end(); ++it){
+		*it.Cell = Wall::TopWall    
+	}
+}
+
+void Maze::knock_down( int x, int y , Cell::Wall wall){
+	switch(wall){
+		case Cell::Wall::Topwall:
+
+	}
 }

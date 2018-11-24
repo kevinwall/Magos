@@ -3,34 +3,44 @@
 
 class Maze
 {
+private:
+	int col, lin;
+	std::vector<Cell> ptr_maze;
 public:
-	enum Wall{
-		None = 0,
-		TopWall = 1, // Cima
-		RightWall = 2, // Direita
-		BottomWall = 4,// Baixo
-		LeftWall = 8 // Esquerda
-	}
-
+	
 	struct Cell
 	{
-		int lin, col;
-		Cell( int lin_ = 0 , int col_ = 0) :
-			 lin(lin_) , col(col_) { /*empty*/}
+		struct FlagCell
+			{
+				bool path = false; // paredes destruidas
+				bool visited = false; // celulas já visitadas
+			};
+
+		enum Wall{
+			None = 0,
+			TopWall = 1, // Cima
+			RightWall = 2, // Direita
+			BottomWall = 4,// Baixo
+			LeftWall = 8 // Esquerda
+		};
+
+		Cell( int col, int lin , Wall wall) : col_(col) , lin_(lin) {
+			wall = 15;
+		}
+
 	};
 
-
-	Maze(int col , int lin);
+	Maze(int col , int lin , std::vector<Maze> ptr_maze );
 	~Maze();
+	Make_maze( std::vector<Maze> ptr_maze );
 
-	int col, lin;
-private:
-	struct FlagCell
-	{
-		int walls_destroyed; // paredes destruidas
-		bool already_visited; // celulas já visitadas
-		int id_cell; // identificação da célula
-	};
+	void get_lin(){
+		return this->lin;
+	}
+
+	void get_col(){
+		return this->col;
+	}
 };
 
 #endif
