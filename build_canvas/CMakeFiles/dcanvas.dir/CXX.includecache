@@ -1,0 +1,54 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kevin/Área de Trabalho/Magos/dev_canvas/include/canvas.h
+memory
+-
+cstring
+-
+common.h
+/home/kevin/Área de Trabalho/Magos/dev_canvas/include/common.h
+
+/home/kevin/Área de Trabalho/Magos/dev_canvas/include/common.h
+cstring
+-
+iostream
+-
+
+/home/kevin/Área de Trabalho/Magos/dev_canvas/include/stb_image_write.h
+stdio.h
+-
+stdarg.h
+-
+stdlib.h
+-
+string.h
+-
+math.h
+-
+assert.h
+-
+
+/home/kevin/Área de Trabalho/Magos/dev_canvas/src/canvas.cpp
+stdexcept
+-
+iostream
+-
+../include/canvas.h
+/home/kevin/Área de Trabalho/Magos/dev_canvas/include/canvas.h
+
+/home/kevin/Área de Trabalho/Magos/dev_canvas/src/driver_canvas.cpp
+iostream
+-
+cstring
+-
+../include/stb_image_write.h
+/home/kevin/Área de Trabalho/Magos/dev_canvas/include/stb_image_write.h
+../include/canvas.h
+/home/kevin/Área de Trabalho/Magos/dev_canvas/include/canvas.h
+
