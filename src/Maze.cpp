@@ -1,33 +1,72 @@
 #include "Maze.h"
-#include <cstdlib> // srand , rand
-#include <vector>
-#include <ctime>
-#include <string>
 
-Maze::Maze( int col = 2, int lin = 1 , 
-	std::vecto<Cell> ptr_maze ) : col_(col) , lin_(lin)
+Maze::Maze( int col_ = 2, int lin_ = 1 ) 
 {
-	ptr_maze.reserve( col_* lin_);
-
-	Make_maze( ptr_maze );
+	col = col_  ;
+	lin = lin_;
+	ptr_maze =  new Cell[ col* lin];
 }
-
-Maze::~Maze(){
-
-	delete [] ptr_maze;
-}
-
-void Maze::Make_maze(std::vecto<Maze> ptr_maze ){
-
-	for (std::vector<Maze>::iterator it = ptr_maze.begin() 
-		; it != ptr_maze.end(); ++it){
-		*it.Cell = Wall::TopWall    
+// função para verificar se tá válido as imprenssões
+void Maze::print_maze(){
+	for( int i = 0 ; i < col * lin ; i++){
+		std::cout << ptr_maze[i] ;
 	}
+	std::cout << std::endl;
+}
+// Construtor da célula
+Maze::Cell::Cell(){
+	 TopWall = true ;
+	 RightWall = true ; 
+	 BottomWall = true ; 
+	 LeftWall = true ;
+}
+// Verificação se há muros
+bool Maze::has_wall( int x, int y ){
+	return ptr_maze[ col * y  + x].LeftWall or ptr_maze[ col * y + x].RightWall or ptr_maze[ col * y  + x].TopWall
+	or ptr_maze[ col * y  + x].BottomWall;
 }
 
-void Maze::knock_down( int x, int y , Cell::Wall wall){
-	switch(wall){
-		case Cell::Wall::Topwall:
+bool Maze::has_right_wall( int x, int y ){
+	return ptr_maze[ col * y + x ].RightWall;
+}
 
+bool Maze::has_left_wall( int x, int y ){
+	return ptr_maze[ col * y + x ].LeftWall;
+}
+
+bool Maze::has_top_wall( int x, int y ){
+	return ptr_maze[ col * y + x ].TopWall;
+}
+
+bool Maze::has_bottom_wall( int x, int y ){
+	return ptr_maze[ col * y + x ].BottomWall;
+}
+
+bool Maze::ranged_out( int x, int y ){
+	if( x > lin or y > col or x < 0 or y < 0){
+		return false 
+	}
+
+	return true;
+}
+                                    
+// função que derruba as paredes
+void Maze::knock_down( int x, int y , Maze::Wall wall){
+	if( !ranged_out(x,y)){
+		throw std::string(" Coordenadas inválidas");
+	}
+	switch(wall){
+		case Maze::Wall::TopWall:
+			ptr_maze[ col * y + x].Topwall = false;
+			break;
+		case Maze::Wall::RightWall:
+			ptr_maze[ col * y + x].RightWall = false;
+			break;
+		case Maze::Wall::BottomWall:
+			ptr_maze[ col * y + x].BottomWall = false;
+			break;	
+		case Maze::Wall::LeftWall:
+			ptr_maze[ col * y + x].LeftWall = false;
+			break;		
 	}
 }
