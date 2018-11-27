@@ -9,7 +9,7 @@ Maze::Maze( int col_ = 2, int lin_ = 1 )
 // função para verificar se tá válido as imprenssões
 void Maze::print_maze(){
 	for( int i = 0 ; i < col * lin ; i++){
-		std::cout << ptr_maze[i] ;
+		std::cout << ptr_maze[i] << std::endl;
 	}
 	std::cout << std::endl;
 }
@@ -44,7 +44,7 @@ bool Maze::has_bottom_wall( int x, int y ){
 
 bool Maze::ranged_out( int x, int y ){
 	if( x > lin or y > col or x < 0 or y < 0){
-		return false 
+		return false ;
 	}
 
 	return true;
@@ -56,17 +56,20 @@ void Maze::knock_down( int x, int y , Maze::Wall wall){
 		throw std::string(" Coordenadas inválidas");
 	}
 	switch(wall){
-		case Maze::Wall::TopWall:
-			ptr_maze[ col * y + x].Topwall = false;
+		case Maze::Wall::m_TopWall:
+			ptr_maze[ col * y + x].TopWall = false;
 			break;
-		case Maze::Wall::RightWall:
+		case Maze::Wall::m_RightWall:
 			ptr_maze[ col * y + x].RightWall = false;
 			break;
-		case Maze::Wall::BottomWall:
+		case Maze::Wall::m_BottomWall:
 			ptr_maze[ col * y + x].BottomWall = false;
 			break;	
-		case Maze::Wall::LeftWall:
+		case Maze::Wall::m_LeftWall:
 			ptr_maze[ col * y + x].LeftWall = false;
-			break;		
+			break;
+		default : 
+			break;	
 	}
+
 }

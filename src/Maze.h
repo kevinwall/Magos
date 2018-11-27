@@ -24,11 +24,12 @@ public:
 		friend std::ostream& operator<<( std::ostream& os, const Cell& cells ){
 			if( cells.TopWall == true and cells.RightWall == true and cells.BottomWall == true and
 				cells.LeftWall == true ){
-				os << " 1 ";
+				os << " Nada destruido ";
 				return os;
 			}
+			
+			os << "Alguma parede destruida";
 
-			os << " deu ruim";
 			return os;
 		}
 		Cell();
