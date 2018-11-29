@@ -1,0 +1,3 @@
+/home/kevinwall/Área de Trabalho/Magos/build_render/CMakeFiles/edit_cache.dir
+/home/kevinwall/Área de Trabalho/Magos/build_render/CMakeFiles/rebuild_cache.dir
+/home/kevinwall/Área de Trabalho/Magos/build_render/CMakeFiles/render.dir
