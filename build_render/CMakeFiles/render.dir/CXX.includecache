@@ -1,0 +1,50 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Maze.h
+iostream
+-
+sstream
+-
+vector
+-
+string
+-
+
+/home/kevinwall/Área de Trabalho/Magos/include/canvas.h
+memory
+-
+cstring
+-
+common.h
+/home/kevinwall/Área de Trabalho/Magos/include/common.h
+
+/home/kevinwall/Área de Trabalho/Magos/include/common.h
+cstring
+-
+iostream
+-
+
+/home/kevinwall/Área de Trabalho/Magos/src/Maze.cpp
+Maze.h
+/home/kevinwall/Área de Trabalho/Magos/src/Maze.h
+
+/home/kevinwall/Área de Trabalho/Magos/src/canvas.cpp
+stdexcept
+-
+iostream
+-
+../include/canvas.h
+/home/kevinwall/Área de Trabalho/Magos/include/canvas.h
+
+/home/kevinwall/Área de Trabalho/Magos/src/main.cpp
+iostream
+-
+Maze.h
+/home/kevinwall/Área de Trabalho/Magos/src/Maze.h
+
