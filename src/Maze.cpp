@@ -1,5 +1,15 @@
 #include "Maze.h"
 
+int Maze::size_l()
+{
+	return lin;
+}
+
+int Maze::size_c()
+{
+	return col;
+}
+
 Maze::Maze( int col_ = 2, int lin_ = 1 ) 
 {
 	col = col_  ;

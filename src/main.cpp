@@ -1,8 +1,9 @@
 #include <iostream>
 #include "Maze.h"
+#include "Render.h"
 
 int main(){
-	Maze maze( 2 , 3 );
+	Maze maze( 30 , 30 );
 
 	maze.print_maze();
 	if( maze.has_wall( 1 , 2) == false){
@@ -40,6 +41,10 @@ int main(){
 	if( maze.has_wall( 1 , 2) == false){
 		std::cout << "Tem nenhuma parede na célula [1,2]"<< "\n";
 	}
+
+	Render r(maze);
+
+	r.draw();
 
 	return 0;	
 }

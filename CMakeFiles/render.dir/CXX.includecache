@@ -1,0 +1,106 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kevin/Área de Trabalho/Magos/include/canvas.h
+memory
+-
+cstring
+-
+common.h
+/home/kevin/Área de Trabalho/Magos/include/common.h
+
+/home/kevin/Área de Trabalho/Magos/include/common.h
+cstring
+-
+iostream
+-
+
+/home/kevin/Área de Trabalho/Magos/include/stb_image_write.h
+stdio.h
+-
+stdarg.h
+-
+stdlib.h
+-
+string.h
+-
+math.h
+-
+assert.h
+-
+
+/home/kevin/Área de Trabalho/Magos/src/Maze.cpp
+Maze.h
+/home/kevin/Área de Trabalho/Magos/src/Maze.h
+
+/home/kevin/Área de Trabalho/Magos/src/Render.cpp
+Render.h
+/home/kevin/Área de Trabalho/Magos/src/Render.h
+iostream
+-
+../include/stb_image_write.h
+/home/kevin/Área de Trabalho/Magos/include/stb_image_write.h
+
+/home/kevin/Área de Trabalho/Magos/src/canvas.cpp
+stdexcept
+-
+iostream
+-
+../include/canvas.h
+/home/kevin/Área de Trabalho/Magos/include/canvas.h
+
+/home/kevin/Área de Trabalho/Magos/src/driver_canvas.cpp
+iostream
+-
+cstring
+-
+../include/stb_image_write.h
+/home/kevin/Área de Trabalho/Magos/include/stb_image_write.h
+../include/canvas.h
+/home/kevin/Área de Trabalho/Magos/include/canvas.h
+
+/home/kevin/Área de Trabalho/Magos/src/main.cpp
+iostream
+-
+Maze.h
+/home/kevin/Área de Trabalho/Magos/src/Maze.h
+Render.h
+/home/kevin/Área de Trabalho/Magos/src/Render.h
+
+include/Maze.h
+iostream
+-
+sstream
+-
+vector
+-
+string
+-
+
+include/Render.h
+Maze.h
+include/Maze.h
+canvas.h
+include/canvas.h
+common.h
+include/common.h
+
+include/canvas.h
+memory
+-
+cstring
+-
+common.h
+include/common.h
+
+include/common.h
+cstring
+-
+iostream
+-
+
