@@ -6,5 +6,5 @@ CXX_FLAGS =  -Wall    -std=gnu++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I"/home/kevin/Área de Trabalho/Magos/include" 
+CXX_INCLUDES = -I/home/giovanne/Magos/include 
 

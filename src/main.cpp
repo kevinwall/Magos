@@ -3,7 +3,7 @@
 #include "Render.h"
 
 int main(){
-	Maze maze( 30 , 30 );
+	Maze maze( 30 , 3);
 
 	maze.print_maze();
 	if( maze.has_wall( 1 , 2) == false){

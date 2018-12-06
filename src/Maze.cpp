@@ -10,7 +10,7 @@ int Maze::size_c()
 	return col;
 }
 
-Maze::Maze( int col_ = 2, int lin_ = 1 ) 
+Maze::Maze( int col_ = 0, int lin_ = 0 ) 
 {
 	col = col_  ;
 	lin = lin_;
