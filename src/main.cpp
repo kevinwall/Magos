@@ -3,7 +3,7 @@
 #include "Render.h"
 
 int main(){
-	Maze maze( 30 , 30 );
+	Maze maze( 30 , 10 );
 
 	maze.print_maze();
 	if( maze.has_wall( 1 , 2) == false){
@@ -42,7 +42,7 @@ int main(){
 		std::cout << "Tem nenhuma parede na célula [1,2]"<< "\n";
 	}
 
-	Render r(maze);
+	Render r(&maze, 100, 500);
 
 	r.draw();
 

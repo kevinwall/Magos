@@ -1,1 +1,0 @@
-/usr/bin/c++    -Wall    CMakeFiles/dcanvas.dir/src/Maze.cpp.o CMakeFiles/dcanvas.dir/src/canvas.cpp.o CMakeFiles/dcanvas.dir/src/main.cpp.o  -o dcanvas 

@@ -20,7 +20,7 @@ public:
 	The constructor witch links the Render to the maze witch 
 	is going to be rendered and creates the canvas with the desired size.
 	*/
-	Render(Maze& maze);
+	Render(Maze* maze, size_t height_, size_t width_);
 
 	/* 
 	Default destructor witch is going to delete the class 
