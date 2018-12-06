@@ -68,15 +68,27 @@ void Maze::knock_down( int x, int y , Maze::Wall wall){
 	switch(wall){
 		case Maze::Wall::m_TopWall:
 			ptr_maze[ col * y + x].TopWall = false;
+			if( ranged_out( y-1, x) == true ){
+				ptr_maze[ col * y-1 + x].BottomWall = false;
+			}
 			break;
 		case Maze::Wall::m_RightWall:
 			ptr_maze[ col * y + x].RightWall = false;
+			if( ranged_out( y, x+1) == true ){
+				ptr_maze[ col * y + (x+1)].LeftWall = false;
+			}
 			break;
 		case Maze::Wall::m_BottomWall:
 			ptr_maze[ col * y + x].BottomWall = false;
+			if( ranged_out( y+1, x) == true ){
+				ptr_maze[ col * y+1 + x].TopWall = false;
+			}
 			break;	
 		case Maze::Wall::m_LeftWall:
 			ptr_maze[ col * y + x].LeftWall = false;
+			if( ranged_out( y, x-1) == true ){
+				ptr_maze[ col * y + (x-1)].RightWall = false;
+			}
 			break;
 		default : 
 			break;	
