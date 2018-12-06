@@ -59,6 +59,10 @@ public:
 
 	bool ranged_out( int x, int y );
 
+	int size_l();
+
+	int size_c();
+
 private:
 	int col, lin;
 	Cell* ptr_maze;

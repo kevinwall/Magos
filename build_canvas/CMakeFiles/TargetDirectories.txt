@@ -1,3 +1,0 @@
-/home/kevin/Área de Trabalho/Magos/build_canvas/CMakeFiles/edit_cache.dir
-/home/kevin/Área de Trabalho/Magos/build_canvas/CMakeFiles/rebuild_cache.dir
-/home/kevin/Área de Trabalho/Magos/build_canvas/CMakeFiles/dcanvas.dir

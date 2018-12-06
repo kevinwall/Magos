@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include <cstring>
 
@@ -7,6 +8,7 @@
 #include "../include/canvas.h"
 
 using namespace canvas;
+
 
 int main(void)
 {
@@ -68,3 +70,4 @@ int main(void)
                 width_3*3)  ;           // length of a row (in bytes), see above.
 
 }
+*/
