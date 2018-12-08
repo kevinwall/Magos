@@ -31,7 +31,11 @@ public:
 	/*
 	The function that is going to create the image representing the actual state of the maze.
 	*/
-	void draw(); 
+	void draw( int count); 
+
+	void set_maze( Maze* maze ){
+	 	m_maze = maze;
+	}
 };
 
 #endif

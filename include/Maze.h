@@ -5,6 +5,10 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
+#include <string>
 
 class Maze
 {
@@ -19,7 +23,7 @@ public:
 
 		bool Visited ;
 		bool Path ;
-		int id ;
+		int set_p;
 
 		friend std::ostream& operator<<( std::ostream& os, const Cell& cells ){
 			if( cells.TopWall == true and cells.RightWall == true and cells.BottomWall == true and
@@ -45,7 +49,7 @@ public:
 	void print_maze();
 	Maze(int col , int lin );
 	~Maze() = default;
-	void knock_down( int x, int y, Maze::Wall wall);
+	bool knock_down( int x, int y, Maze::Wall wall);
 
 	bool has_wall( int x, int y );
 
@@ -62,6 +66,20 @@ public:
 	int size_l();
 
 	int size_c();
+
+	bool build( );
+
+	int choose_x( );
+
+	int choose_y( );
+
+	Maze::Wall choose_wall();
+
+	bool check_cell();
+
+	void set_same_number( int old ,  int young);
+
+
 
 private:
 	int col, lin;

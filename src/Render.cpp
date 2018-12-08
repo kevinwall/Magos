@@ -9,6 +9,7 @@
 
 Render::Render(Maze* maze, size_t height_, size_t width_)
 {
+	
 	m_maze = maze; // Set the pointer to reference the maze we want to draw.
 	auto width = width_; // Gets the image line size.
 	auto height = height_; // Gets the image collum size.
@@ -25,7 +26,7 @@ Render::Render(Maze* maze, size_t height_, size_t width_)
 }
 
 
-void Render::draw()
+void Render::draw( int count )
 {
 	
 	int i, j;
@@ -40,17 +41,27 @@ void Render::draw()
 				m_canvas.vline((border_h+(j*tam_h)), (border_v+(i*tam_v)), tam_v+1, canvas::BLACK);
 			}
 			
-			if(m_maze->has_top_wall( j, i ))
+			if(m_maze->has_top_wall( j, i )) //If the cell has the top wall.
 			{
 				m_canvas.hline((border_h+(j*tam_h)), (border_v+(i*tam_v)), tam_h+1, canvas::BLACK);
+			}
+
+			if(m_maze->has_right_wall( j, i )) //If the cell has the right wall.
+			{
+				m_canvas.vline((border_h+(j*tam_h+tam_h)), (border_v+(i*tam_v)), tam_v+1, canvas::BLACK);
+			}
+
+			if(m_maze->has_bottom_wall( j, i )) //If the cell has the bottom wall.
+			{
+				m_canvas.hline((border_h+(j*tam_h)), (border_v+(i*tam_v+tam_v)), tam_h+1, canvas::BLACK);
 			}
 			
 		}	
 
-		m_canvas.vline((border_h+(j*tam_h)), (border_v+(i*tam_v)), tam_v+1, canvas::BLACK);
+		//m_canvas.vline((border_h+(j*tam_h)), (border_v+(i*tam_v)), tam_v+1, canvas::BLACK);
 	}
 
-	m_canvas.hline(border_h, (border_v+(i*tam_v)), tam_h*m_maze->size_c(), canvas::BLACK);
+	//m_canvas.hline(border_h, (border_v+(i*tam_v)), tam_h*m_maze->size_c(), canvas::BLACK);
 
 	//m_canvas.vline(m_canvas.width()-border_h, border_v, m_canvas.width()-(2*border_v), canvas::BLACK);
 	//m_canvas.hline(border_h, m_canvas.height()-border_v, m_canvas.height()-(2*border_h)+1, canvas::BLACK);
@@ -61,7 +72,8 @@ void Render::draw()
 
      // Invocando a função de gravação da biblioteca STB para gravar PNG.
     stbi_write_png_compression_level = 0;    // defaults to 8; set to higher for more compression
-    stbi_write_png( "teste.png",      // file name
+   	std::string name_file = "teste" + std::to_string(count) +".png";
+    stbi_write_png( name_file.c_str(),      // file name
                 width, height,        // image dimensions
                 3,                    // # of channels per pixel
                 pixels,               // the pixels
