@@ -80,7 +80,9 @@ public:
 
 	void set_same_number( int old ,  int young);
 
+	void solve( int x, int y, bool& solved);
 
+	int is_visited(int x, int y);
 
 private:
 	int col, lin;

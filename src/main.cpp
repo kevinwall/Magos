@@ -61,6 +61,7 @@ int main(){
 	int count = 0;
 	r.draw( count );
 	count++;
+	
 	while( maze.check_cell()){
 		if(maze.build()){
 			Render r(&maze, 300, 300);
@@ -68,6 +69,13 @@ int main(){
 			count++;
 		}		
 	}
+
+	bool solved = false;
+	maze.solve( 0, 0, solved);
+	Render d(&maze, 300, 300);
+	d.draw(count);
+	
+
 
 
 	return 0;	

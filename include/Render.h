@@ -13,7 +13,12 @@ private:
 	int tam_h; // The horizontal size of one cell.
 	int tam_v; // The vertical size of one cell.
 	int border_h; // The horizontal border size.
-	int border_v; // The vertical border size.
+	int border_v; // The vertical border size.[]
+	int box_h;
+	int box_v;
+	int b_box_h;
+	int b_box_v;
+
 
 public:
 	/* 

@@ -181,25 +181,34 @@ void Maze::set_same_number( int old ,  int young){
 
 void Maze::solve( int x , int y, bool& solved){
 	ptr_maze[  col * y  + x ].Visited = 2;
-
-	if( x == lin ; y == col){
+	//std::cout << solved << std::endl;
+	//std::cout << x << " " << lin << " " << y << " " << col << std::endl;
+	if( x == (lin -1) and y == (col-1)){
 		solved = true;
-	}else if(!solved){
+	}else {
 
-		if( !(has_bottom_wall()) 
-			and ptr_maze[  col * (y+1)  + x ].Visited == 0){
-			solve( x, y+1);
-		}if( !(has_right_wall())
-			and ptr_maze[  col * y  + (x+1) ].Visited == 0){
-			solve( x+1, y);
-		}if( !(has_top_wall())
-			and ptr_maze[  col * (y-1)  + x ].Visited == 0){
-			solve( x, y-1);
-		}if( !(has_left_wall())
-			and ptr_maze[  col * y  + (x-1) ].Visited == 0){
-			solve( x-1, y);
+		if( !(has_bottom_wall(x,y)) 
+			and ptr_maze[  col * (y+1)  + x ].Visited == 0
+			and !solved){
+			solve( x, y+1,solved);
+		}if( !(has_right_wall(x,y))
+			and ptr_maze[  col * y  + (x+1) ].Visited == 0
+			and !solved){
+			solve( x+1, y,solved);
+		}if( !(has_top_wall(x,y))
+			and ptr_maze[  col * (y-1)  + x ].Visited == 0
+			and !solved){
+			solve( x, y-1,solved);
+		}if( !(has_left_wall(x,y))
+			and ptr_maze[  col * y  + (x-1) ].Visited == 0
+			and !solved){
+			solve( x-1, y,solved);
 		}
-		ptr_maze[ col * y + x].Visited = 1;
+		if (!solved) ptr_maze[ col * y + x].Visited = 1;
 
 	}
+}
+
+int Maze::is_visited( int x, int y ){
+	return ptr_maze[ col * y + x ].Visited;
 }

@@ -91,6 +91,10 @@ algorithm
 -
 string
 -
+stack
+-
+list
+-
 
 include/Render.h
 Maze.h

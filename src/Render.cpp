@@ -23,6 +23,12 @@ Render::Render(Maze* maze, size_t height_, size_t width_)
 
 	tam_h = (width - (2*border_h)) / m_maze->size_c(); // Getting the horizontal cell size.
 	tam_v = (height - (2*border_v)) / m_maze->size_l(); // Getting the vertical cell size.
+	
+	b_box_h = tam_h / 10;
+	b_box_v = tam_v / 10;
+
+	box_h = (tam_h - (2*b_box_h));
+	box_v = (tam_v - (2*b_box_v));
 }
 
 
@@ -54,6 +60,18 @@ void Render::draw( int count )
 			if(m_maze->has_bottom_wall( j, i )) //If the cell has the bottom wall.
 			{
 				m_canvas.hline((border_h+(j*tam_h)), (border_v+(i*tam_v+tam_v)), tam_h+1, canvas::BLACK);
+			}
+
+			if(m_maze->is_visited(j,i) == 1)
+			{
+				std::cout<<"Tamanho do box: "<<box_h<<" "<<box_v<<std::endl;
+				m_canvas.box( ((border_h+(j*tam_h))+b_box_h) + 3, ((border_v+(i*tam_v))+b_box_v) + 3, 5, 5, canvas::YELLOW );
+			}
+
+			if(m_maze->is_visited(j,i) == 2)
+			{
+				std::cout<<"Tamanho do box: "<<box_h<<" "<<box_v<<std::endl;
+				m_canvas.box( ((border_h+(j*tam_h))+b_box_h) + 3, ((border_v+(i*tam_v))+b_box_v) + 3, 5, 5, canvas::RED );
 			}
 			
 		}	
