@@ -1,3 +1,0 @@
-/home/giovanne/Magos/CMakeFiles/edit_cache.dir
-/home/giovanne/Magos/CMakeFiles/rebuild_cache.dir
-/home/giovanne/Magos/CMakeFiles/render.dir
