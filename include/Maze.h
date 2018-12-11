@@ -9,6 +9,8 @@
 #include <ctime>
 #include <algorithm>
 #include <string>
+#include <stack>
+#include <list>
 
 class Maze
 {
@@ -21,8 +23,7 @@ public:
 		bool BottomWall; 
 		bool LeftWall ;
 
-		bool Visited ;
-		bool Path ;
+		int Visited ;
 		int set_p;
 
 		friend std::ostream& operator<<( std::ostream& os, const Cell& cells ){

@@ -178,3 +178,21 @@ void Maze::set_same_number( int old ,  int young){
 		}
 	}
 }
+
+void Maze::solve( int x , int y){
+	ptr_maze[  col * y  + x ].Visited = 2;
+
+	if( !(has_bottom_wall()) and 
+		ptr_maze[  col * (y+1)  + x ].Visited == 0){
+		solve( x, y+1);
+	}else if( !(has_right_wall())
+		and ptr_maze[  col * y  + (x+1) ].Visited == 0){
+		solve( x+1, y);
+	}else if( !(has_top_wall())
+		and ptr_maze[  col * (y-1)  + x ].Visited == 0){
+		solve( x, y-1);
+	}else if ( !(has_left_wall())
+		and ptr_maze[  col * y  + (x-1) ].Visited == 0){
+		solve( x-1, y);
+	}
+}
