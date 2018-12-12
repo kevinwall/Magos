@@ -86,6 +86,10 @@ public:
 private:
 	int col, lin;
 	Cell* ptr_maze;
+
+	//int * rand_lin;
+	//int * rand_col;
+	//int * rand_wall;
 };
 
 #endif

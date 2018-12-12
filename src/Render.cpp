@@ -1,5 +1,6 @@
 #include "Render.h"
 #include <iostream>
+#include <cmath>
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "../include/stb_image_write.h"
@@ -24,11 +25,16 @@ Render::Render(Maze* maze, size_t height_, size_t width_)
 	tam_h = (width - (2*border_h)) / m_maze->size_c(); // Getting the horizontal cell size.
 	tam_v = (height - (2*border_v)) / m_maze->size_l(); // Getting the vertical cell size.
 	
-	b_box_h = tam_h / 10;
-	b_box_v = tam_v / 10;
 
-	box_h = (tam_h - (2*b_box_h));
-	box_v = (tam_v - (2*b_box_v));
+	b_box_h = tam_h / 4;
+	b_box_v = tam_v / 4;
+
+
+	box_h = tam_h - (2*b_box_h);
+	box_v = tam_v - (2*b_box_v);
+
+	
+	
 }
 
 
@@ -64,14 +70,24 @@ void Render::draw( int count )
 
 			if(m_maze->is_visited(j,i) == 1)
 			{
-				std::cout<<"Tamanho do box: "<<box_h<<" "<<box_v<<std::endl;
-				m_canvas.box( ((border_h+(j*tam_h))+b_box_h) + 3, ((border_v+(i*tam_v))+b_box_v) + 3, 5, 5, canvas::YELLOW );
+				//std::cout<<"Tamanho do box: "<<b_box_h<<" "<<b_box_v<<" "<<tam_h<<std::endl;
+				m_canvas.box( (border_h+(j*tam_h)) + b_box_h, (border_v+(i*tam_v)) + b_box_v , box_h, box_v, canvas::YELLOW );
 			}
 
 			if(m_maze->is_visited(j,i) == 2)
 			{
-				std::cout<<"Tamanho do box: "<<box_h<<" "<<box_v<<std::endl;
-				m_canvas.box( ((border_h+(j*tam_h))+b_box_h) + 3, ((border_v+(i*tam_v))+b_box_v) + 3, 5, 5, canvas::RED );
+				//std::cout<<"Tamanho do box: "<<b_box_h<<" "<<b_box_v<<" "<<tam_h<<std::endl;
+				m_canvas.box( (border_h+(j*tam_h)) + b_box_h , (border_v+(i*tam_v)) + b_box_v , box_h, box_v, canvas::RED );
+			}
+
+			if(i == 0 and j == 0)
+			{
+				m_canvas.box( (border_h+(j*tam_h)) + b_box_h, (border_v+(i*tam_v)) + b_box_v , box_h, box_v, canvas::LIGHT_BLUE);
+			}
+
+			if(i == m_maze->size_l()-1 and j == m_maze->size_c()-1)
+			{
+				m_canvas.box( (border_h+(j*tam_h)) + b_box_h, (border_v+(i*tam_v)) + b_box_v , box_h, box_v, canvas::GREEN);
 			}
 			
 		}	
