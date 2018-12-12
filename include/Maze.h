@@ -80,11 +80,17 @@ public:
 
 	void set_same_number( int old ,  int young);
 
+	void solve( int x, int y, bool& solved);
 
+	int is_visited(int x, int y);
 
 private:
 	int col, lin;
 	Cell* ptr_maze;
+
+	//int * rand_lin;
+	//int * rand_col;
+	//int * rand_wall;
 };
 
 #endif

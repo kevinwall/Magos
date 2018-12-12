@@ -1,4 +1,6 @@
 #include "Maze.h"
+#include <algorithm>
+#include <chrono>       // std::chrono::system_clock
 
 int Maze::size_l()
 {
@@ -20,6 +22,34 @@ Maze::Maze( int col_ = 2, int lin_ = 1 )
 		ptr_maze[i].set_p = i;  
 	}
 
+	/*
+
+	rand_lin = new int[lin];
+
+	for(auto j{0}; j < lin; j++)
+	{
+		rand_lin[j] = j;
+	}
+
+	rand_col = new int[col];
+
+	for(auto k{0}; k < col; k++)
+	{
+		rand_col[k] = k;
+	}
+
+	rand_wall = new int[4];
+
+	for(auto d{0}; d < 4; d++)
+	{
+		rand_wall[d] = d;
+	}
+
+	*/
+	//unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();	
+	//std::shuffle(rand_lin, rand_lin+lin, std::default_random_engine(seed));
+	//std::shuffle(rand_col, rand_col+col, std::default_random_engine(seed));
+	//std::shuffle(rand_wall, rand_wall+4, std::default_random_engine(seed));
 
 	std::srand( ( unsigned int ) std::time(NULL));
 }
@@ -125,8 +155,13 @@ bool Maze::knock_down( int x, int y , Maze::Wall wall){
 			ptr_maze[ col * y + (x-1)].set_p),std::min(ptr_maze[col * y + x].set_p,
 			ptr_maze[ col * y + (x-1)].set_p)); 
 
-			return true;	
+			return true;
+
+		case None:
+			return false;	
 	}
+
+	return false;
 
 
 }
@@ -139,11 +174,13 @@ bool Maze::build( ){
 }
 // escolhe uma coordenada y randomicamente
 int Maze::choose_x( ){
+	//return rand_lin[std::rand() %  size_l()];
 	return std::rand() %  size_l();
 }
 // escolhe uma coordenada y randomicamente
 int Maze::choose_y( ){
-	return std::rand() %  size_c() ;
+	//return rand_col[std::rand() %  size_c()];
+	return std::rand() %  size_c();
 }
 // escolhe uma parede para quebrar randomicamente
 Maze::Wall Maze::choose_wall(){
@@ -157,6 +194,8 @@ Maze::Wall Maze::choose_wall(){
 		case 3 :
 			return Maze::Wall::m_LeftWall;
 	}
+
+	return Maze::Wall::m_BottomWall;
 	
 }
 // Função que checa o numero das celulas para juntar o "conjunto" entre elas depois
@@ -179,20 +218,36 @@ void Maze::set_same_number( int old ,  int young){
 	}
 }
 
-void Maze::solve( int x , int y){
+void Maze::solve( int x , int y, bool& solved){
 	ptr_maze[  col * y  + x ].Visited = 2;
+	//std::cout << solved << std::endl;
+	//std::cout << x << " " << lin << " " << y << " " << col << std::endl;
+	if( x == (lin -1) and y == (col-1)){
+		solved = true;
+	}else {
 
-	if( !(has_bottom_wall()) and 
-		ptr_maze[  col * (y+1)  + x ].Visited == 0){
-		solve( x, y+1);
-	}else if( !(has_right_wall())
-		and ptr_maze[  col * y  + (x+1) ].Visited == 0){
-		solve( x+1, y);
-	}else if( !(has_top_wall())
-		and ptr_maze[  col * (y-1)  + x ].Visited == 0){
-		solve( x, y-1);
-	}else if ( !(has_left_wall())
-		and ptr_maze[  col * y  + (x-1) ].Visited == 0){
-		solve( x-1, y);
+		if( !(has_bottom_wall(x,y)) 
+			and ptr_maze[  col * (y+1)  + x ].Visited == 0
+			and !solved){
+			solve( x, y+1,solved);
+		}if( !(has_right_wall(x,y))
+			and ptr_maze[  col * y  + (x+1) ].Visited == 0
+			and !solved){
+			solve( x+1, y,solved);
+		}if( !(has_top_wall(x,y))
+			and ptr_maze[  col * (y-1)  + x ].Visited == 0
+			and !solved){
+			solve( x, y-1,solved);
+		}if( !(has_left_wall(x,y))
+			and ptr_maze[  col * y  + (x-1) ].Visited == 0
+			and !solved){
+			solve( x-1, y,solved);
+		}
+		if (!solved) ptr_maze[ col * y + x].Visited = 1;
+
 	}
+}
+
+int Maze::is_visited( int x, int y ){
+	return ptr_maze[ col * y + x ].Visited;
 }
