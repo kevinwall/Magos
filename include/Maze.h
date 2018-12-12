@@ -41,6 +41,7 @@ public:
 	};
 
 	enum Wall{
+		None = 0,
 		m_TopWall = 1,
 		m_RightWall = 2,
 		m_BottomWall = 4,

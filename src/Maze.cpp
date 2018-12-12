@@ -22,34 +22,6 @@ Maze::Maze( int col_ = 2, int lin_ = 1 )
 		ptr_maze[i].set_p = i;  
 	}
 
-	/*
-
-	rand_lin = new int[lin];
-
-	for(auto j{0}; j < lin; j++)
-	{
-		rand_lin[j] = j;
-	}
-
-	rand_col = new int[col];
-
-	for(auto k{0}; k < col; k++)
-	{
-		rand_col[k] = k;
-	}
-
-	rand_wall = new int[4];
-
-	for(auto d{0}; d < 4; d++)
-	{
-		rand_wall[d] = d;
-	}
-
-	*/
-	//unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();	
-	//std::shuffle(rand_lin, rand_lin+lin, std::default_random_engine(seed));
-	//std::shuffle(rand_col, rand_col+col, std::default_random_engine(seed));
-	//std::shuffle(rand_wall, rand_wall+4, std::default_random_engine(seed));
 
 	std::srand( ( unsigned int ) std::time(NULL));
 }
@@ -161,13 +133,11 @@ bool Maze::knock_down( int x, int y , Maze::Wall wall){
 		case None:
 			return false;	
 	}
-<<<<<<< HEAD
-=======
+
 
 	return false;
 
 
->>>>>>> 22dc95355ff2b2067f31d23445ef9b42c25c20c0
 }
 // quebra as paredes randomicamente de uma celula randomica
 // e retorna true caso ela possa ser quebrada
@@ -224,31 +194,31 @@ void Maze::set_same_number( int old ,  int young){
 }
 
 void Maze::solve( int x , int y, bool& solved){
-	ptr_maze[  col * y  + x ].Visited = 2;
+	ptr_maze[  col * x  + y ].Visited = 2;
 	//std::cout << solved << std::endl;
 	//std::cout << x << " " << lin << " " << y << " " << col << std::endl;
 	if( x == (lin -1) and y == (col-1)){
 		solved = true;
 	}else {
 
-		if( !(has_bottom_wall(x,y)) 
-			and ptr_maze[  col * (y+1)  + x ].Visited == 0
-			and !solved){
-			solve( x, y+1,solved);
-		}if( !(has_right_wall(x,y))
-			and ptr_maze[  col * y  + (x+1) ].Visited == 0
+		if( !(has_bottom_wall(y,x)) 
+			and ptr_maze[  col * (x+1)  + y ].Visited == 0
 			and !solved){
 			solve( x+1, y,solved);
-		}if( !(has_top_wall(x,y))
-			and ptr_maze[  col * (y-1)  + x ].Visited == 0
+		}if( !(has_right_wall(y,x))
+			and ptr_maze[  col * x  + (y+1) ].Visited == 0
 			and !solved){
-			solve( x, y-1,solved);
-		}if( !(has_left_wall(x,y))
-			and ptr_maze[  col * y  + (x-1) ].Visited == 0
+			solve( x, y+1,solved);
+		}if( !(has_top_wall(y,x))
+			and ptr_maze[  col * (x-1)  + y ].Visited == 0
 			and !solved){
 			solve( x-1, y,solved);
+		}if( !(has_left_wall(y,x))
+			and ptr_maze[  col * x  + (y-1) ].Visited == 0
+			and !solved){
+			solve( x, y-1,solved);
 		}
-		if (!solved) ptr_maze[ col * y + x].Visited = 1;
+		if (!solved) ptr_maze[ col * x + y].Visited = 1;
 
 	}
 }
