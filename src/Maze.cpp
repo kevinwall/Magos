@@ -22,6 +22,8 @@ Maze::Maze( int col_ = 2, int lin_ = 1 )
 		ptr_maze[i].set_p = i;  
 	}
 
+	/*
+
 	rand_lin = new int[lin];
 
 	for(auto j{0}; j < lin; j++)
@@ -43,10 +45,11 @@ Maze::Maze( int col_ = 2, int lin_ = 1 )
 		rand_wall[d] = d;
 	}
 
-	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();	
-	std::shuffle(rand_lin, rand_lin+lin, std::default_random_engine(seed));
-	std::shuffle(rand_col, rand_col+col, std::default_random_engine(seed));
-	std::shuffle(rand_wall, rand_wall+4, std::default_random_engine(seed));
+	*/
+	//unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();	
+	//std::shuffle(rand_lin, rand_lin+lin, std::default_random_engine(seed));
+	//std::shuffle(rand_col, rand_col+col, std::default_random_engine(seed));
+	//std::shuffle(rand_wall, rand_wall+4, std::default_random_engine(seed));
 
 	std::srand( ( unsigned int ) std::time(NULL));
 }
@@ -171,15 +174,17 @@ bool Maze::build( ){
 }
 // escolhe uma coordenada y randomicamente
 int Maze::choose_x( ){
-	return rand_lin[std::rand() %  size_l()];
+	//return rand_lin[std::rand() %  size_l()];
+	return std::rand() %  size_l();
 }
 // escolhe uma coordenada y randomicamente
 int Maze::choose_y( ){
-	return rand_col[std::rand() %  size_c()];
+	//return rand_col[std::rand() %  size_c()];
+	return std::rand() %  size_c();
 }
 // escolhe uma parede para quebrar randomicamente
 Maze::Wall Maze::choose_wall(){
-	switch( rand_wall[std::rand() % 4] ){
+	switch( std::rand() % 4 ){
 		case 0 :
 			return Maze::Wall::m_TopWall;
 		case 1 :

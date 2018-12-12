@@ -70,13 +70,13 @@ void Render::draw( int count )
 
 			if(m_maze->is_visited(j,i) == 1)
 			{
-				std::cout<<"Tamanho do box: "<<b_box_h<<" "<<b_box_v<<" "<<tam_h<<std::endl;
+				//std::cout<<"Tamanho do box: "<<b_box_h<<" "<<b_box_v<<" "<<tam_h<<std::endl;
 				m_canvas.box( (border_h+(j*tam_h)) + b_box_h, (border_v+(i*tam_v)) + b_box_v , box_h, box_v, canvas::YELLOW );
 			}
 
 			if(m_maze->is_visited(j,i) == 2)
 			{
-				std::cout<<"Tamanho do box: "<<b_box_h<<" "<<b_box_v<<" "<<tam_h<<std::endl;
+				//std::cout<<"Tamanho do box: "<<b_box_h<<" "<<b_box_v<<" "<<tam_h<<std::endl;
 				m_canvas.box( (border_h+(j*tam_h)) + b_box_h , (border_v+(i*tam_v)) + b_box_v , box_h, box_v, canvas::RED );
 			}
 
