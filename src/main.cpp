@@ -2,18 +2,49 @@
 #include "Maze.h"
 #include "Render.h"
 #include "build.h"
+#include <cstdlib>
 
-int main(){
-	Maze maze( 25 , 25 );
+int main(int argc, char const *argv[]){
+	
+	int lin, col, rend_l, rend_col;
 
+	if(argc == 5)
+	{
+		lin = std::atoi(argv[1]);
+		col = std::atoi(argv[2]);
+
+		rend_l = std::atoi(argv[3]);
+		rend_col = std::atoi(argv[4]);
+	}
+	else if(argc == 4)
+	{
+		lin = std::atoi(argv[1]);
+		col = std::atoi(argv[2]);
+
+		rend_l = std::atoi(argv[3]);
+		rend_col = rend_l;
+	}
+	else
+	{
+		lin = 10;
+		col = 10;
+
+		rend_l = 300;
+		rend_col = 300;
+	}
+
+	Maze maze( lin, col );
+
+	/*
 	maze.print_maze();
 	if( maze.has_wall( 1 , 2) == false){
 		std::cout << "Falta uma parede na célula [1,2]"<< "\n";
 	}else {
 		std::cout << "Há todas as paredes " << "\n"; 
 	}
+	*/
 
-	std::cout << maze.size_c() << " " << maze.size_l() ;
+	//std::cout << maze.size_c() << " " << maze.size_l() ;
 
 	 // for( auto i = 0 ; i < 5 ; i++){
 	 // 	for (int j = 0; j < 5; j++)
@@ -56,7 +87,7 @@ int main(){
 	}*/
 
 
-	Render r(&maze, 300, 300);
+	Render r(&maze, rend_l, rend_col);
 	// Laço para gerar imagens conforme for quebrando as paredes
 	int count = 0;
 	r.draw( count );
@@ -64,7 +95,7 @@ int main(){
 	
 	while( maze.check_cell()){
 		if(maze.build()){
-			Render r(&maze, 300, 300);
+			Render r(&maze, rend_l, rend_col);
 			r.draw( count );
 			count++;
 		}		
@@ -72,7 +103,7 @@ int main(){
 
 	bool solved = false;
 	maze.solve( 0, 0, solved);
-	Render d(&maze, 300, 300);
+	Render d(&maze, rend_l, rend_col);
 	d.draw(count);
 	
 
