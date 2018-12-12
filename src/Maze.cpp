@@ -72,63 +72,62 @@ bool Maze::knock_down( int x, int y , Maze::Wall wall){
 	if( !ranged_out(x,y)){
 		throw std::string(" Coordenadas inválidas");
 	}
+
 	switch(wall){
 		case Maze::Wall::m_TopWall:// condição caso seja da borda 
 		   //ou as celular ja estiverem conectadas, retornar falso
-			if( y <= 0 or ptr_maze[ col * y + x].set_p ==
-			ptr_maze[ col * (y-1) + x].set_p ) return false;
+			if( x <= 0 or ptr_maze[ col * x + y].set_p ==
+			ptr_maze[ (col * (x-1) + y)].set_p ) return false;
 
-			ptr_maze[ col * y + x].TopWall = false;
-			ptr_maze[ col * (y-1) + x].BottomWall = false;
+			ptr_maze[ col * x + y].TopWall = false;
+			ptr_maze[ col * (x-1) + y].BottomWall = false;
 			
-			set_same_number( std::max(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * (y-1) + x].set_p),std::min(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * (y-1) + x].set_p)); 
+			set_same_number( std::max(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * (x-1) + y].set_p),std::min(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * (x-1) + y].set_p)); 
 
 			return true;
 		case Maze::Wall::m_RightWall:// condição caso seja da borda 
 		   //ou as celular ja estiverem conectadas, retornar falso
-			if( x >= (size_l()-1) or ptr_maze[ col * y + x].set_p ==
-			ptr_maze[ col * y + (x+1)].set_p ) return false;
+			if( y >= (size_c()-1) or ptr_maze[ col * x + y].set_p ==
+			ptr_maze[ col * x + (y+1)].set_p ) return false;
 
-			ptr_maze[ col * y + x].RightWall = false;			
-			ptr_maze[ col * y + (x+1)].LeftWall = false;
+			ptr_maze[ col * x + y].RightWall = false;			
+			ptr_maze[ col * x + (y+1)].LeftWall = false;
 			
-			set_same_number( std::max(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * y + (x+1)].set_p),std::min(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * y + (x+1)].set_p)); 
+			set_same_number( std::max(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * x + (y+1)].set_p),std::min(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * x + (y+1)].set_p)); 
 
 
 			return true;
 		case Maze::Wall::m_BottomWall:// condição caso seja da borda 
 		   //ou as celular ja estiverem conectadas, retornar falso
-			if( y >= (size_c()-1) or ptr_maze[ col * y + x].set_p ==
+			if( x >= (size_l()-1) or ptr_maze[ col * x + y].set_p ==
 			ptr_maze[ col * (y+1) + x].set_p ) return false;
 
-			ptr_maze[ col * y + x].BottomWall = false;			
-			ptr_maze[ col * (y+1) + x].TopWall = false;
+			ptr_maze[ col * x + y].BottomWall = false;			
+			ptr_maze[ col * (x+1) +y].TopWall = false;
 			
-			set_same_number( std::max(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * (y+1) + x].set_p),std::min(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * (y+1) + x].set_p)); 
+			set_same_number( std::max(ptr_maze[(col * x) + y].set_p,
+			ptr_maze[ col * (x+1) + y].set_p),std::min(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * (x+1) + y].set_p)); 
 
 			return true;	
 		case Maze::Wall::m_LeftWall:// condição caso seja da borda 
 		   //ou as celular ja estiverem conectadas, retornar falso
-			if( x <= 0 or ptr_maze[ col * y + x].set_p ==
-			ptr_maze[ col * y + (x-1)].set_p ) return false;
+			if( y <= 0 or ptr_maze[ col * x + y].set_p ==
+			ptr_maze[ col * x + (y-1)].set_p ) return false;
 
-			ptr_maze[ col * y + x].LeftWall = false;
-			ptr_maze[ col * y + (x-1)].RightWall = false;
+			ptr_maze[ col * x + y].LeftWall = false;
+			ptr_maze[ col * x + (y-1)].RightWall = false;
 			// Seta o menor valor entre as celular vizinhas para unir elas
-			set_same_number( std::max(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * y + (x-1)].set_p),std::min(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * y + (x-1)].set_p)); 
+			set_same_number( std::max(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * x + (y-1)].set_p),std::min(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * x + (y-1)].set_p)); 
 
 			return true;	
 	}
-
-
 }
 // quebra as paredes randomicamente de uma celula randomica
 // e retorna true caso ela possa ser quebrada
@@ -172,8 +171,9 @@ bool Maze::check_cell(){
 // Função que serve para setar o numero da "menor" celula para deixarem todas com mesmo numero 
 // para em seguida para o laço com o check cell que irá parar quando todas tiverem o mesmo numero
 void Maze::set_same_number( int old ,  int young){
-	for( int i = 0; i < size_l() * size_c() ; i++){
+	for( int i = 0; i < size_l() * size_c()  ; i++){
 		if( ptr_maze[i].set_p == old){
+
 			ptr_maze[i].set_p = young;
 		}
 	}

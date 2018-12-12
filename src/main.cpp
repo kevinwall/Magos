@@ -4,7 +4,7 @@
 #include "build.h"
 
 int main(){
-	Maze maze( 25 , 25 );
+	Maze maze( 10, 20 );
 
 	maze.print_maze();
 	if( maze.has_wall( 1 , 2) == false){
@@ -69,7 +69,6 @@ int main(){
 			count++;
 		}		
 	}
-
 	bool solved = false;
 	maze.solve( 0, 0, solved);
 	Render d(&maze, 300, 300);
