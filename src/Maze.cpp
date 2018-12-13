@@ -1,6 +1,7 @@
 #include "Maze.h"
 #include <algorithm>
 #include <chrono>       // std::chrono::system_clock
+#include "Render.h"
 
 int Maze::size_l()
 {
@@ -22,34 +23,6 @@ Maze::Maze( int col_ = 2, int lin_ = 1 )
 		ptr_maze[i].set_p = i;  
 	}
 
-	/*
-
-	rand_lin = new int[lin];
-
-	for(auto j{0}; j < lin; j++)
-	{
-		rand_lin[j] = j;
-	}
-
-	rand_col = new int[col];
-
-	for(auto k{0}; k < col; k++)
-	{
-		rand_col[k] = k;
-	}
-
-	rand_wall = new int[4];
-
-	for(auto d{0}; d < 4; d++)
-	{
-		rand_wall[d] = d;
-	}
-
-	*/
-	//unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();	
-	//std::shuffle(rand_lin, rand_lin+lin, std::default_random_engine(seed));
-	//std::shuffle(rand_col, rand_col+col, std::default_random_engine(seed));
-	//std::shuffle(rand_wall, rand_wall+4, std::default_random_engine(seed));
 
 	std::srand( ( unsigned int ) std::time(NULL));
 }
@@ -72,7 +45,7 @@ bool Maze::has_wall( int x, int y ){
 	return ptr_maze[ col * y  + x].LeftWall or ptr_maze[ col * y + x].RightWall or ptr_maze[ col * y  + x].TopWall
 	or ptr_maze[ col * y  + x].BottomWall;
 }
-
+// 
 bool Maze::has_right_wall( int x, int y ){
 	return ptr_maze[ col * y + x ].RightWall;
 }
@@ -102,64 +75,66 @@ bool Maze::knock_down( int x, int y , Maze::Wall wall){
 	if( !ranged_out(x,y)){
 		throw std::string(" Coordenadas inválidas");
 	}
+
 	switch(wall){
 		case Maze::Wall::m_TopWall:// condição caso seja da borda 
 		   //ou as celular ja estiverem conectadas, retornar falso
-			if( y <= 0 or ptr_maze[ col * y + x].set_p ==
-			ptr_maze[ col * (y-1) + x].set_p ) return false;
+			if( x <= 0 or ptr_maze[ col * x + y].set_p ==
+			ptr_maze[ (col * (x-1) + y)].set_p ) return false;
 
-			ptr_maze[ col * y + x].TopWall = false;
-			ptr_maze[ col * (y-1) + x].BottomWall = false;
+			ptr_maze[ col * x + y].TopWall = false;
+			ptr_maze[ col * (x-1) + y].BottomWall = false;
 			
-			set_same_number( std::max(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * (y-1) + x].set_p),std::min(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * (y-1) + x].set_p)); 
+			set_same_number( std::max(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * (x-1) + y].set_p),std::min(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * (x-1) + y].set_p)); 
 
 			return true;
 		case Maze::Wall::m_RightWall:// condição caso seja da borda 
 		   //ou as celular ja estiverem conectadas, retornar falso
-			if( x >= (size_l()-1) or ptr_maze[ col * y + x].set_p ==
-			ptr_maze[ col * y + (x+1)].set_p ) return false;
+			if( y >= (size_c()-1) or ptr_maze[ col * x + y].set_p ==
+			ptr_maze[ col * x + (y+1)].set_p ) return false;
 
-			ptr_maze[ col * y + x].RightWall = false;			
-			ptr_maze[ col * y + (x+1)].LeftWall = false;
+			ptr_maze[ col * x + y].RightWall = false;			
+			ptr_maze[ col * x + (y+1)].LeftWall = false;
 			
-			set_same_number( std::max(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * y + (x+1)].set_p),std::min(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * y + (x+1)].set_p)); 
+			set_same_number( std::max(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * x + (y+1)].set_p),std::min(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * x + (y+1)].set_p)); 
 
 
 			return true;
 		case Maze::Wall::m_BottomWall:// condição caso seja da borda 
 		   //ou as celular ja estiverem conectadas, retornar falso
-			if( y >= (size_c()-1) or ptr_maze[ col * y + x].set_p ==
+			if( x >= (size_l()-1) or ptr_maze[ col * x + y].set_p ==
 			ptr_maze[ col * (y+1) + x].set_p ) return false;
 
-			ptr_maze[ col * y + x].BottomWall = false;			
-			ptr_maze[ col * (y+1) + x].TopWall = false;
+			ptr_maze[ col * x + y].BottomWall = false;			
+			ptr_maze[ col * (x+1) +y].TopWall = false;
 			
-			set_same_number( std::max(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * (y+1) + x].set_p),std::min(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * (y+1) + x].set_p)); 
+			set_same_number( std::max(ptr_maze[(col * x) + y].set_p,
+			ptr_maze[ col * (x+1) + y].set_p),std::min(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * (x+1) + y].set_p)); 
 
 			return true;	
 		case Maze::Wall::m_LeftWall:// condição caso seja da borda 
 		   //ou as celular ja estiverem conectadas, retornar falso
-			if( x <= 0 or ptr_maze[ col * y + x].set_p ==
-			ptr_maze[ col * y + (x-1)].set_p ) return false;
+			if( y <= 0 or ptr_maze[ col * x + y].set_p ==
+			ptr_maze[ col * x + (y-1)].set_p ) return false;
 
-			ptr_maze[ col * y + x].LeftWall = false;
-			ptr_maze[ col * y + (x-1)].RightWall = false;
+			ptr_maze[ col * x + y].LeftWall = false;
+			ptr_maze[ col * x + (y-1)].RightWall = false;
 			// Seta o menor valor entre as celular vizinhas para unir elas
-			set_same_number( std::max(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * y + (x-1)].set_p),std::min(ptr_maze[col * y + x].set_p,
-			ptr_maze[ col * y + (x-1)].set_p)); 
+			set_same_number( std::max(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * x + (y-1)].set_p),std::min(ptr_maze[col * x + y].set_p,
+			ptr_maze[ col * x + (y-1)].set_p)); 
 
 			return true;
 
 		case None:
 			return false;	
 	}
+
 
 	return false;
 
@@ -211,43 +186,51 @@ bool Maze::check_cell(){
 // Função que serve para setar o numero da "menor" celula para deixarem todas com mesmo numero 
 // para em seguida para o laço com o check cell que irá parar quando todas tiverem o mesmo numero
 void Maze::set_same_number( int old ,  int young){
-	for( int i = 0; i < size_l() * size_c() ; i++){
+	for( int i = 0; i < size_l() * size_c()  ; i++){
 		if( ptr_maze[i].set_p == old){
+
 			ptr_maze[i].set_p = young;
 		}
 	}
 }
 
-void Maze::solve( int x , int y, bool& solved){
-	ptr_maze[  col * y  + x ].Visited = 2;
-	//std::cout << solved << std::endl;
-	//std::cout << x << " " << lin << " " << y << " " << col << std::endl;
+/*void Maze::solve( int x , int y, bool& solved, Render& r, int& count){
+	ptr_maze[  col * x  + y ].Visited = 2;
+	r.draw(count);
 	if( x == (lin -1) and y == (col-1)){
 		solved = true;
 	}else {
 
-		if( !(has_bottom_wall(x,y)) 
-			and ptr_maze[  col * (y+1)  + x ].Visited == 0
-			and !solved){
-			solve( x, y+1,solved);
-		}if( !(has_right_wall(x,y))
-			and ptr_maze[  col * y  + (x+1) ].Visited == 0
+		if( !(has_bottom_wall(y,x)) 
+			and ptr_maze[  col * (x+1)  + y ].Visited == 0
 			and !solved){
 			solve( x+1, y,solved);
-		}if( !(has_top_wall(x,y))
-			and ptr_maze[  col * (y-1)  + x ].Visited == 0
+		}if( !(has_right_wall(y,x))
+			and ptr_maze[  col * x  + (y+1) ].Visited == 0
 			and !solved){
-			solve( x, y-1,solved);
-		}if( !(has_left_wall(x,y))
-			and ptr_maze[  col * y  + (x-1) ].Visited == 0
+			solve( x, y+1,solved);
+		}if( !(has_top_wall(y,x))
+			and ptr_maze[  col * (x-1)  + y ].Visited == 0
 			and !solved){
 			solve( x-1, y,solved);
+		}if( !(has_left_wall(y,x))
+			and ptr_maze[  col * x  + (y-1) ].Visited == 0
+			and !solved){
+			solve( x, y-1,solved);
 		}
-		if (!solved) ptr_maze[ col * y + x].Visited = 1;
+		if (!solved) ptr_maze[ col * x + y].Visited = 1;
 
 	}
-}
+}*/
 
 int Maze::is_visited( int x, int y ){
 	return ptr_maze[ col * y + x ].Visited;
+}
+
+void Maze::set_visited( int x, int y, int Visited_){
+	ptr_maze[  col * x  + y ].Visited = Visited_;
+}
+
+int Maze::get_visited( int x, int y){
+	return ptr_maze[  col * x  + y ].Visited ;
 }

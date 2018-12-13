@@ -9,8 +9,7 @@
 #include <ctime>
 #include <algorithm>
 #include <string>
-#include <stack>
-#include <list>
+
 
 class Maze
 {
@@ -50,6 +49,7 @@ public:
 	void print_maze();
 	Maze(int col , int lin );
 	~Maze() = default;
+
 	bool knock_down( int x, int y, Maze::Wall wall);
 
 	bool has_wall( int x, int y );
@@ -80,9 +80,11 @@ public:
 
 	void set_same_number( int old ,  int young);
 
-	void solve( int x, int y, bool& solved);
-
 	int is_visited(int x, int y);
+
+	void set_visited( int x, int y, int Visited_);
+
+	int get_visited( int x, int y );
 
 private:
 	int col, lin;
