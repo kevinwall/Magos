@@ -2,17 +2,18 @@
 #include <algorithm>
 #include <chrono>       // std::chrono::system_clock
 #include "Render.h"
-
+// Função para consultar a quantidade de linha máximas
 int Maze::size_l()
 {
 	return lin;
 }
-
+// Função para cosultar a quantidade de colunas máximas
 int Maze::size_c()
 {
 	return col;
 }
-
+//Construtor do maze que cria um vetor baseado nas linhas e colunas 
+// e dar o indices  para cada célula
 Maze::Maze( int col_ = 2, int lin_ = 1 ) 
 {
 	col = col_  ;
@@ -45,18 +46,21 @@ bool Maze::has_wall( int x, int y ){
 	return ptr_maze[ col * y  + x].LeftWall or ptr_maze[ col * y + x].RightWall or ptr_maze[ col * y  + x].TopWall
 	or ptr_maze[ col * y  + x].BottomWall;
 }
-// 
+// Função auxiliar para consultar se há parede direita
 bool Maze::has_right_wall( int x, int y ){
 	return ptr_maze[ col * y + x ].RightWall;
 }
+// Função auxiliar para consultar se há parede esquerda
 
 bool Maze::has_left_wall( int x, int y ){
 	return ptr_maze[ col * y + x ].LeftWall;
 }
+// Função auxiliar para consultar se há parede em cima
 
 bool Maze::has_top_wall( int x, int y ){
 	return ptr_maze[ col * y + x ].TopWall;
 }
+// Função auxiliar para consultar se há parede em baixo
 
 bool Maze::has_bottom_wall( int x, int y ){
 	return ptr_maze[ col * y + x ].BottomWall;
@@ -193,44 +197,15 @@ void Maze::set_same_number( int old ,  int young){
 		}
 	}
 }
-
-/*void Maze::solve( int x , int y, bool& solved, Render& r, int& count){
-	ptr_maze[  col * x  + y ].Visited = 2;
-	r.draw(count);
-	if( x == (lin -1) and y == (col-1)){
-		solved = true;
-	}else {
-
-		if( !(has_bottom_wall(y,x)) 
-			and ptr_maze[  col * (x+1)  + y ].Visited == 0
-			and !solved){
-			solve( x+1, y,solved);
-		}if( !(has_right_wall(y,x))
-			and ptr_maze[  col * x  + (y+1) ].Visited == 0
-			and !solved){
-			solve( x, y+1,solved);
-		}if( !(has_top_wall(y,x))
-			and ptr_maze[  col * (x-1)  + y ].Visited == 0
-			and !solved){
-			solve( x-1, y,solved);
-		}if( !(has_left_wall(y,x))
-			and ptr_maze[  col * x  + (y-1) ].Visited == 0
-			and !solved){
-			solve( x, y-1,solved);
-		}
-		if (!solved) ptr_maze[ col * x + y].Visited = 1;
-
-	}
-}*/
-
+// Função que consulta se uma celula foi visitada(fins de deuparação).Necessaria para o solve
 int Maze::is_visited( int x, int y ){
 	return ptr_maze[ col * y + x ].Visited;
 }
-
+// Função que altera se uma célula foi visitada
 void Maze::set_visited( int x, int y, int Visited_){
 	ptr_maze[  col * x  + y ].Visited = Visited_;
 }
-
+// /Função que utilizada pelo solve para verificar se uma celula foi visitada
 int Maze::get_visited( int x, int y){
 	return ptr_maze[  col * x  + y ].Visited ;
 }
