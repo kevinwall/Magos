@@ -28,9 +28,9 @@ Para executar o código, basta entrar na pasta raíz do projeto e digitar o coma
 
 Após isso, basta digitar o comando **make** para compilar o projeto. </br>
 
-Assim, com o projeto compilado, basta digitar **./Magos l c H W**, onde **l** é a quantidade de linhas do labirinto (altura), **c** é a quantidade de colunas do labirinto (largura), **H** é a altura das imagens e **W** a largura das imagens. </br>
+Assim, com o projeto compilado, basta digitar **./Magos L C H W**, onde **L** é a quantidade de linhas do labirinto, **C** é a quantidade de colunas do labirinto, **H** é a altura das imagens e **W** a largura das imagens. </br>
 
-Também é possível chamar **./Magos**, **./Magos l c** ou **./Magos l c H**. Respectivamente, estes comandos geram um labirinto 10x10 com imagens de 300x300 de tamanho, um labirinto com lxc dimensões com imagens de tamanho l.100xc.100 (cem vezes o tamanho de cada dimensão do labirinto) e um labirinto com dimensões lxc com imagens de tamanho HxH. </br>
+Também é possível chamar **./Magos**, **./Magos L C** ou **./Magos L C H**. Respectivamente, estes comandos geram um labirinto 10x10 com imagens de 300x300 de tamanho, um labirinto com LxC dimensões com imagens de tamanho L.100xC.100 (cem vezes o tamanho de cada dimensão do labirinto) e um labirinto com dimensões LxC com imagens de tamanho HxH. </br>
 
 # Autoria #
 
