@@ -86,6 +86,14 @@ public:
 
 	int get_visited( int x, int y );
 
+	bool is_right_wall( int x, int y );
+
+	bool is_left_wall( int x, int y );
+
+	bool is_top_wall( int x, int y );
+
+	bool is_bottom_wall( int x, int y ); 
+
 private:
 	int col, lin;
 	Cell* ptr_maze;

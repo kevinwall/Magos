@@ -1,0 +1,152 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Maze.h
+iostream
+-
+sstream
+-
+vector
+-
+string
+-
+cstdlib
+-
+ctime
+-
+algorithm
+-
+string
+-
+
+../include/Render.h
+Maze.h
+../include/Maze.h
+canvas.h
+../include/canvas.h
+common.h
+../include/common.h
+
+../include/build.h
+iostream
+-
+Maze.h
+../include/Maze.h
+Render.h
+../include/Render.h
+list
+-
+
+../include/canvas.h
+memory
+-
+cstring
+-
+common.h
+../include/common.h
+
+../include/common.h
+cstring
+-
+iostream
+-
+
+../include/solve.h
+Render.h
+../include/Render.h
+Maze.h
+../include/Maze.h
+
+/home/kevinwall/Área de Trabalho/Magos/include/canvas.h
+memory
+-
+cstring
+-
+common.h
+/home/kevinwall/Área de Trabalho/Magos/include/common.h
+
+/home/kevinwall/Área de Trabalho/Magos/include/common.h
+cstring
+-
+iostream
+-
+
+/home/kevinwall/Área de Trabalho/Magos/include/stb_image_write.h
+stdio.h
+-
+stdarg.h
+-
+stdlib.h
+-
+string.h
+-
+math.h
+-
+assert.h
+-
+
+/home/kevinwall/Área de Trabalho/Magos/src/Maze.cpp
+Maze.h
+/home/kevinwall/Área de Trabalho/Magos/src/Maze.h
+algorithm
+-
+chrono
+-
+Render.h
+/home/kevinwall/Área de Trabalho/Magos/src/Render.h
+
+/home/kevinwall/Área de Trabalho/Magos/src/Render.cpp
+Render.h
+/home/kevinwall/Área de Trabalho/Magos/src/Render.h
+iostream
+-
+cmath
+-
+../include/stb_image_write.h
+/home/kevinwall/Área de Trabalho/Magos/include/stb_image_write.h
+
+/home/kevinwall/Área de Trabalho/Magos/src/Solve.cpp
+solve.h
+/home/kevinwall/Área de Trabalho/Magos/src/solve.h
+
+/home/kevinwall/Área de Trabalho/Magos/src/build.cpp
+build.h
+/home/kevinwall/Área de Trabalho/Magos/src/build.h
+
+/home/kevinwall/Área de Trabalho/Magos/src/canvas.cpp
+stdexcept
+-
+iostream
+-
+../include/canvas.h
+/home/kevinwall/Área de Trabalho/Magos/include/canvas.h
+
+/home/kevinwall/Área de Trabalho/Magos/src/driver_canvas.cpp
+iostream
+-
+cstring
+-
+../include/stb_image_write.h
+/home/kevinwall/Área de Trabalho/Magos/include/stb_image_write.h
+../include/canvas.h
+/home/kevinwall/Área de Trabalho/Magos/include/canvas.h
+
+/home/kevinwall/Área de Trabalho/Magos/src/main.cpp
+iostream
+-
+Maze.h
+/home/kevinwall/Área de Trabalho/Magos/src/Maze.h
+Render.h
+/home/kevinwall/Área de Trabalho/Magos/src/Render.h
+build.h
+/home/kevinwall/Área de Trabalho/Magos/src/build.h
+cstdlib
+-
+solve.h
+/home/kevinwall/Área de Trabalho/Magos/src/solve.h
+

@@ -234,3 +234,23 @@ void Maze::set_visited( int x, int y, int Visited_){
 int Maze::get_visited( int x, int y){
 	return ptr_maze[  col * x  + y ].Visited ;
 }
+
+bool Maze::is_right_wall( int x, int y )
+{
+	return ptr_maze[ col * y + x ].RightWall == true;
+}
+
+bool Maze::is_left_wall( int x, int y )
+{
+	return ptr_maze[ col * y + x ].LeftWall == true;
+}
+
+bool Maze::is_top_wall( int x, int y )
+{
+	return ptr_maze[ col * y + x ].TopWall == true;
+}
+
+bool Maze::is_bottom_wall( int x, int y )
+{
+	return ptr_maze[ col * y + x ].BottomWall == true;
+}
