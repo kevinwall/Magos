@@ -1,6 +1,7 @@
 #include "Maze.h"
 #include <algorithm>
 #include <chrono>       // std::chrono::system_clock
+#include "Render.h"
 
 int Maze::size_l()
 {
@@ -44,7 +45,7 @@ bool Maze::has_wall( int x, int y ){
 	return ptr_maze[ col * y  + x].LeftWall or ptr_maze[ col * y + x].RightWall or ptr_maze[ col * y  + x].TopWall
 	or ptr_maze[ col * y  + x].BottomWall;
 }
-
+// 
 bool Maze::has_right_wall( int x, int y ){
 	return ptr_maze[ col * y + x ].RightWall;
 }
@@ -193,10 +194,9 @@ void Maze::set_same_number( int old ,  int young){
 	}
 }
 
-void Maze::solve( int x , int y, bool& solved){
+/*void Maze::solve( int x , int y, bool& solved, Render& r, int& count){
 	ptr_maze[  col * x  + y ].Visited = 2;
-	//std::cout << solved << std::endl;
-	//std::cout << x << " " << lin << " " << y << " " << col << std::endl;
+	r.draw(count);
 	if( x == (lin -1) and y == (col-1)){
 		solved = true;
 	}else {
@@ -221,8 +221,16 @@ void Maze::solve( int x , int y, bool& solved){
 		if (!solved) ptr_maze[ col * x + y].Visited = 1;
 
 	}
-}
+}*/
 
 int Maze::is_visited( int x, int y ){
 	return ptr_maze[ col * y + x ].Visited;
+}
+
+void Maze::set_visited( int x, int y, int Visited_){
+	ptr_maze[  col * x  + y ].Visited = Visited_;
+}
+
+int Maze::get_visited( int x, int y){
+	return ptr_maze[  col * x  + y ].Visited ;
 }

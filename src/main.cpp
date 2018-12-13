@@ -3,7 +3,7 @@
 #include "Render.h"
 #include "build.h"
 #include <cstdlib>
-
+#include "solve.h"
 
 int main(int argc, char const *argv[]){
 	
@@ -50,12 +50,12 @@ int main(int argc, char const *argv[]){
 		}		
 	}
 	bool solved = false;
-	maze.solve( 0, 0, solved);
 	Render d(&maze, rend_l, rend_col);
+
+	solve the_solve(&d, &maze);
+	the_solve.resolve(0,0, solved,count);
 	d.draw(count);
 	
-
-
 
 	return 0;	
 }
