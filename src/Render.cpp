@@ -5,9 +5,6 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "../include/stb_image_write.h"
 
-// TODO: Trocar w por h pois está invertido.
-// TODO: Passar altura e largura por parâmetro.
-
 Render::Render(Maze* maze, size_t height_, size_t width_)
 {
 	
@@ -26,24 +23,24 @@ Render::Render(Maze* maze, size_t height_, size_t width_)
 	tam_v = (height - (2*border_v)) / m_maze->size_l(); // Getting the vertical cell size.
 	
 
-	b_box_h = tam_h / 4;
-	b_box_v = tam_v / 4;
+	b_box_h = tam_h / 4; // Getting the horizontal space between the cell wall and the box.
+	b_box_v = tam_v / 4; // Getting the vertical space between the cell wall and the box.
 
 
-	box_h = tam_h - (2*b_box_h);
-	box_v = tam_v - (2*b_box_v);
+	box_h = tam_h - (2*b_box_h); // Getting the box horizontal size.
+	box_v = tam_v - (2*b_box_v); // Getting the box vertical size.
 
 	
 	
 }
 
-
+// The function we're using to draw the maze.
 void Render::draw( int count )
 {
 	
 	int i, j;
 
-	// For each cell, we draw the left and upper wall.
+	// For each cell, we draw all the walls.
 	for(i = 0; i < m_maze->size_l(); i++)
 	{
 		for(j = 0; j < m_maze->size_c(); j++)
@@ -68,45 +65,37 @@ void Render::draw( int count )
 				m_canvas.hline((border_h+(j*tam_h)), (border_v+(i*tam_v+tam_v)), tam_h+1, canvas::BLACK);
 			}
 
-			if(m_maze->is_visited(j,i) == 1)
+			if(m_maze->is_visited(j,i) == 1) // If the cell it's a invalid path
 			{
-				//std::cout<<"Tamanho do box: "<<b_box_h<<" "<<b_box_v<<" "<<tam_h<<std::endl;
 				m_canvas.box( (border_h+(j*tam_h)) + b_box_h, (border_v+(i*tam_v)) + b_box_v , box_h, box_v, canvas::YELLOW );
 			}
 
-			if(m_maze->is_visited(j,i) == 2)
+			if(m_maze->is_visited(j,i) == 2) // If the cell it's a valid path
 			{
-				//std::cout<<"Tamanho do box: "<<b_box_h<<" "<<b_box_v<<" "<<tam_h<<std::endl;
 				m_canvas.box( (border_h+(j*tam_h)) + b_box_h , (border_v+(i*tam_v)) + b_box_v , box_h, box_v, canvas::RED );
 			}
 
-			if(i == 0 and j == 0)
+			if(i == 0 and j == 0) // If it's the entrance
 			{
 				m_canvas.box( (border_h+(j*tam_h)) + b_box_h, (border_v+(i*tam_v)) + b_box_v , box_h, box_v, canvas::LIGHT_BLUE);
 			}
 
-			if(i == m_maze->size_l()-1 and j == m_maze->size_c()-1)
+			if(i == m_maze->size_l()-1 and j == m_maze->size_c()-1) // If it's the exit
 			{
 				m_canvas.box( (border_h+(j*tam_h)) + b_box_h, (border_v+(i*tam_v)) + b_box_v , box_h, box_v, canvas::GREEN);
 			}
 			
 		}	
-
-		//m_canvas.vline((border_h+(j*tam_h)), (border_v+(i*tam_v)), tam_v+1, canvas::BLACK);
 	}
 
-	//m_canvas.hline(border_h, (border_v+(i*tam_v)), tam_h*m_maze->size_c(), canvas::BLACK);
-
-	//m_canvas.vline(m_canvas.width()-border_h, border_v, m_canvas.width()-(2*border_v), canvas::BLACK);
-	//m_canvas.hline(border_h, m_canvas.height()-border_v, m_canvas.height()-(2*border_h)+1, canvas::BLACK);
-
+	// Here we get the canvas dimensions to create the png.
 	auto width = m_canvas.width();
     auto height = m_canvas.height();
     auto pixels = m_canvas.buffer();
 
      // Invocando a função de gravação da biblioteca STB para gravar PNG.
     stbi_write_png_compression_level = 0;    // defaults to 8; set to higher for more compression
-   	std::string name_file = "teste" + std::to_string(count) +".png";
+   	std::string name_file = "Maze" + std::to_string(count) +".png";
     stbi_write_png( name_file.c_str(),      // file name
                 width, height,        // image dimensions
                 3,                    // # of channels per pixel

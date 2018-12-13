@@ -57,7 +57,7 @@ public:
 	*/
 	void print_maze();
 	Maze(int col , int lin );
-	~Maze() = default;
+	~Maze();
 	/**
 	*@brief Função que derruba uma parede
 	*/

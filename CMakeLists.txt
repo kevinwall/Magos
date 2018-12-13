@@ -24,4 +24,4 @@ include_directories( include )
 #However, the file(GLOB...) allows for wildcard additions:
 file(GLOB SOURCES "src/*.cpp")
 
-add_executable(render ${SOURCES})
+add_executable(Magos ${SOURCES})

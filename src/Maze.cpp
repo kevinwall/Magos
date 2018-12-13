@@ -27,6 +27,12 @@ Maze::Maze( int col_ = 2, int lin_ = 1 )
 
 	std::srand( ( unsigned int ) std::time(NULL));
 }
+// Destrutor da classe maze que deleta a memória alocada dinamicamente pelo maze.
+Maze::~Maze()
+{
+	delete [] ptr_maze;
+}
+
 // função para verificar se tá válido as imprenssões
 void Maze::print_maze(){
 	for( int i = 0 ; i < col * lin ; i++){
